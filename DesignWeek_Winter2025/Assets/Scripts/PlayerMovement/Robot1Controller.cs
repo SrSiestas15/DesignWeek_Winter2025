@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotController : MonoBehaviour
+public class Robot1Controller : MonoBehaviour
 {
     private bool isMoving;
     private Vector3 originalPos, newPos;
