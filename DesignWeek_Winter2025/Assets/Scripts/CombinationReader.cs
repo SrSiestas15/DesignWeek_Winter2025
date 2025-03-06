@@ -31,11 +31,13 @@ public class CombinationReader : MonoBehaviour
         slotValues = new List<Vector2>();
         foreach (TokenSlot slot in slots)
         {
-            if (slot.GetComponentInChildren<DraggableItem>() != null)
+            if (slot.GetComponentInChildren<DraggableItem>() != null && slot.slotID > 0)
             {
                 DraggableItem draggableItem = slot.gameObject.GetComponentInChildren<DraggableItem>();
                 slotValues.Add(new Vector2(slot.slotID, draggableItem.draggableID));
             }
+
+            
         }
 
         CheckRoom();
@@ -44,6 +46,7 @@ public class CombinationReader : MonoBehaviour
 
     public static void CheckRoom()
     {
+        roomChosen = 0;
         for (int i = 0; i < slotValues.Count; i++)
         {
             if (slotValues[i].y == 1)
@@ -63,16 +66,25 @@ public class CombinationReader : MonoBehaviour
             currentCode += slotValues[i].x;
             currentCode += slotValues[i].y;
         }
+        Debug.Log(currentCode);
     }
 
     public void RoomAndRobot()
     {
         for (int i = 0; i < possibleCombinations.Count; i++)
         {
-            if (possibleCombinations[i] == currentCode)
+            if (possibleCombinations[i] == currentCode && roomChosen != 0)
             {
                 Debug.Log($"move to room {roomChosen} and spawn robot {i}");
+
+                CameraController.roomNum = roomChosen;
+                CameraController.moving = true;
             }
         }
+    }
+
+    public void TurnOnOff(bool on)
+    {
+        gameObject.SetActive(on);
     }
 }
