@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public static Camera camera;
+    public static Camera cameraGO;
     private List<Vector3> roomPos = new List<Vector3>();
     [SerializeField] AnimationCurve lerpCurve;
     private float lerpTimer;
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cameraGO = GetComponent<Camera>();
         
         roomPos.Add(new Vector3 (0, 0, 0)); //PLACEHOLDER FOR INDEX[0]
         roomPos.Add(new Vector3 (-16, 0, 0)); //room 1
@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
             float t = lerpTimer / transitionDuration;
             float curveValue = lerpCurve.Evaluate(t);
 
-            camera.transform.position = Vector3.Lerp(Vector3.zero, roomPos[roomNum], curveValue);
+            cameraGO.transform.position = Vector3.Lerp(Vector3.zero, roomPos[roomNum], curveValue);
             Debug.Log(roomPos[roomNum]);
             if (lerpTimer > transitionDuration)
             {
@@ -47,5 +47,11 @@ public class CameraController : MonoBehaviour
             }
 
         }
+    }
+
+    static public void ResetToRoom()
+    {
+        cameraGO.transform.position = Vector3.zero;
+        UIController.turnOnUIButtonStatic.SetActive(true);
     }
 }

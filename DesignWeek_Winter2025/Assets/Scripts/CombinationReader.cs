@@ -12,12 +12,14 @@ public class CombinationReader : MonoBehaviour
     public static int roomChosen;
     public List<string> possibleCombinations;
     public List<GameObject> possibleRobots;
+    public List<RoomController> roomResetters;
     public static string currentCode;
 
     // Start is called before the first frame update
     void Start()
     {
         slots = GetComponentsInChildren<TokenSlot>();
+
     }
 
     // Update is called once per frame
@@ -77,14 +79,17 @@ public class CombinationReader : MonoBehaviour
             {
                 Debug.Log($"move to room {roomChosen} and spawn robot {i}");
 
+                if (roomResetters[roomChosen] != null)
+                {
+                    roomResetters[roomChosen].ResetPositions();
+                }
+
                 CameraController.roomNum = roomChosen;
                 CameraController.moving = true;
+
+                UIController.TurnOnOff(false);
+                UIController.turnOnUIButtonStatic.SetActive(false);
             }
         }
-    }
-
-    public void TurnOnOff(bool on)
-    {
-        gameObject.SetActive(on);
     }
 }
