@@ -53,5 +53,6 @@ public class CameraController : MonoBehaviour
     {
         cameraGO.transform.position = Vector3.zero;
         UIController.turnOnUIButtonStatic.SetActive(true);
+        UIController.selfDestructButtonStatic.SetActive(false);
     }
 }

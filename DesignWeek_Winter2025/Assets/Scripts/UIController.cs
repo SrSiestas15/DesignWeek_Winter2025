@@ -8,11 +8,15 @@ public class UIController : MonoBehaviour
     public static GameObject terminalUI;
     public GameObject turnOnUIButton;
     public static GameObject turnOnUIButtonStatic;
+    public GameObject selfDestructButton;
+    public static GameObject selfDestructButtonStatic;
 
     // Start is called before the first frame update
     void Start()
     {
         turnOnUIButtonStatic = turnOnUIButton;
+        selfDestructButton.SetActive(false);
+        selfDestructButtonStatic = selfDestructButton;
 
         Transform[] childrenTransforms = GetComponentInParent<Canvas>().gameObject.GetComponentsInChildren<Transform>();
         foreach (Transform t in childrenTransforms)

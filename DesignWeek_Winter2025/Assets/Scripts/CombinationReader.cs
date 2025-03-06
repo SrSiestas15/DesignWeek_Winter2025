@@ -12,6 +12,7 @@ public class CombinationReader : MonoBehaviour
     public static int roomChosen;
     public List<string> possibleCombinations;
     public List<GameObject> possibleRobots;
+    public List<Transform> possibleSpawners;
     public List<RoomController> roomResetters;
     public static string currentCode;
 
@@ -89,6 +90,9 @@ public class CombinationReader : MonoBehaviour
 
                 UIController.TurnOnOff(false);
                 UIController.turnOnUIButtonStatic.SetActive(false);
+                UIController.selfDestructButtonStatic.SetActive(true);
+
+                Instantiate(possibleRobots[i], possibleSpawners[i]);
             }
         }
     }

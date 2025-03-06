@@ -29,6 +29,10 @@ public class RoomController : MonoBehaviour
     {
         for (int i = 0;i < childrenTransforms.Length;i++)
         {
+            if (childrenTransforms[i].gameObject.GetComponentInChildren<Robot1Controller>())
+            {
+                Destroy(childrenTransforms[i].gameObject.GetComponentInChildren<Robot1Controller>().gameObject);
+            };
             childrenTransforms[i].position = savedPositions[i];
         }
     }
