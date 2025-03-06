@@ -12,6 +12,8 @@ public class BoxController : MonoBehaviour
     [SerializeField] LayerMask stopperLayer;
     [SerializeField] LayerMask playerLayer;
 
+    public bool hasChip;
+
     Vector3 obstructionDirection;
 
 

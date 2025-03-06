@@ -8,6 +8,7 @@ public class DeliveryZone : MonoBehaviour
     [SerializeField] private GameObject keyPickUp;
 
     public Transform dropOffZone;
+    private bool delivered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +29,17 @@ public class DeliveryZone : MonoBehaviour
 
     IEnumerator CheckDelivery(GameObject deliveryGO)
     {
-        yield return new WaitForSeconds(1);
-        if(deliveryGO.tag == desiredDelivery.tag)
+        if(deliveryGO.GetComponent<BoxController>())
         {
-            CameraController.ResetToRoom();
-            Instantiate(keyPickUp, dropOffZone.transform.position, Quaternion.identity);
+                Debug.Log("get box");
+            if (deliveryGO.GetComponent<BoxController>().hasChip && !delivered)
+            {
+                CameraController.ResetToRoom();
+                delivered = true;
+                Instantiate(keyPickUp, dropOffZone.transform.position, Quaternion.identity);
+                Debug.Log("get chip");
+                yield return new WaitForSeconds(1);
+            }
         }
     }
 }
