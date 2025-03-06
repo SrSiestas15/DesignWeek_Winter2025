@@ -46,9 +46,9 @@ public class RoomController : MonoBehaviour
             {
                 Destroy(chipBox);
             }
-            if (childrenTransforms[i].gameObject.GetComponentInChildren<Robot1Controller>())
+            if (childrenTransforms[i].gameObject.GetComponentInChildren<RobotController>())
             {
-                Destroy(childrenTransforms[i].gameObject.GetComponentInChildren<Robot1Controller>().gameObject);
+                Destroy(childrenTransforms[i].gameObject.GetComponentInChildren<RobotController>().gameObject);
             };
             childrenTransforms[i].position = savedPositions[i];
         }

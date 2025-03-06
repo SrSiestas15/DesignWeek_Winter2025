@@ -16,16 +16,13 @@ public class CombinationReader : MonoBehaviour
     public List<RoomController> roomResetters;
     public static string currentCode;
 
+    public GameObject[] slotsTemp;
+    public GameObject[] chipsTemp;
+
     // Start is called before the first frame update
     void Start()
     {
         slots = GetComponentsInChildren<TokenSlot>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -93,6 +90,15 @@ public class CombinationReader : MonoBehaviour
                 Instantiate(possibleRobots[i], possibleSpawners[roomChosen]);
                 Debug.Log(i);
             }
+        }
+    }
+
+    void checkChips()
+    {
+        for (int i = 0; i < slotValues.Count; i++)
+        {
+            currentCode += slotValues[i].x;
+            currentCode += slotValues[i].y;
         }
     }
 }

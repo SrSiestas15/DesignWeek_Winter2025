@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot1Controller : MonoBehaviour
+public class RobotController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Transform moveLocation;
