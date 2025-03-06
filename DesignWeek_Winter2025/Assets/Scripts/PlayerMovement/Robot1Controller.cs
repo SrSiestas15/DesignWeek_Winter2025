@@ -4,44 +4,42 @@ using UnityEngine;
 
 public class Robot1Controller : MonoBehaviour
 {
-    private bool isMoving;
-    private Vector3 originalPos, newPos;
-    public float moveTime = 0.2f;
+    public float moveSpeed = 5f;
+    public Transform moveLocation;
 
-    // Update is called once per frame
-    void Update()
+    [Header("Associated with layers set in inspector")]
+    public LayerMask MovementBlocker;
+
+    void Start()
     {
-        if (Input.GetKey(KeyCode.W) && !isMoving) StartCoroutine(Move(Vector3.up));
-
-        if (Input.GetKey(KeyCode.A) && !isMoving) StartCoroutine(Move(Vector3.left));
-
-        if (Input.GetKey(KeyCode.S) && !isMoving) StartCoroutine(Move(Vector3.down));
-
-        if (Input.GetKey(KeyCode.D) && !isMoving) StartCoroutine(Move(Vector3.right));
+        moveLocation.parent = null;   
     }
 
-    // movement coroutine instance
-    public IEnumerator Move(Vector3 direction)
+    void Update()
     {
-        // make it so you cant move while already moving
-        isMoving = true;
-        float elapsedTime = 0;
+        // update the transform pos
+        transform.position = Vector3.MoveTowards(transform.position, moveLocation.position, moveSpeed * Time.deltaTime);
 
-        // store positions
-        originalPos = transform.position;
-        newPos = originalPos + direction;
-
-        // move coroutine
-        while (elapsedTime < moveTime)
+        // if the distance between the robot and the next tile is lessthan or equal to 0.05
+        if (Vector3.Distance(transform.position, moveLocation.position) <= 0.05f)
         {
-            transform.position = Vector3.Lerp(originalPos, newPos, (elapsedTime / moveTime));
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            // handle directional input 
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            {
+                // check if the next move location is not on something that would block the player
+                if (!Physics2D.OverlapCircle(moveLocation.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0), 0.2f, MovementBlocker))
+                {
+                    moveLocation.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
+                }
+            }
+            else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            {
+                // check if the next move location is not on something that would block the player
+                if (!Physics2D.OverlapCircle(moveLocation.position + new Vector3(0, Input.GetAxisRaw("Vertical"), 0), 0.2f, MovementBlocker))
+                {
+                    moveLocation.position += new Vector3(0, Input.GetAxisRaw("Vertical"), 0);
+                }
+            }
         }
-
-        // set new position
-        transform.position = newPos;
-
-        isMoving = false;
     }
 }
