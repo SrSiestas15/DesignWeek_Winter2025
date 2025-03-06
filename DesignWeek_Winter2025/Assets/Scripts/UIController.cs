@@ -25,7 +25,6 @@ public class UIController : MonoBehaviour
             {
                 terminalUI = t.gameObject;
                 terminalUI.SetActive(false);
-                Debug.Log("got it");
             }
         }
     }

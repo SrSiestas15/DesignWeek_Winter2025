@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 2505325682642304762}
   - component: {fileID: 1991249297601070757}
   m_Layer: 3
-  m_Name: Robot1
+  m_Name: Scientist
   m_TagString: Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4b9f26b04bb5748a873954e3108ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   moveLocation: {fileID: 1930057710623929929}
   MovementBlocker:
     serializedVersion: 2

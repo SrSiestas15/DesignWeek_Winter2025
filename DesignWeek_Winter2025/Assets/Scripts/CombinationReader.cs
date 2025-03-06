@@ -69,7 +69,6 @@ public class CombinationReader : MonoBehaviour
             currentCode += slotValues[i].x;
             currentCode += slotValues[i].y;
         }
-        Debug.Log(currentCode);
     }
 
     public void RoomAndRobot()
@@ -78,7 +77,6 @@ public class CombinationReader : MonoBehaviour
         {
             if (possibleCombinations[i] == currentCode && roomChosen != 0)
             {
-                Debug.Log($"move to room {roomChosen} and spawn robot {i}");
 
                 if (roomResetters[roomChosen] != null)
                 {
