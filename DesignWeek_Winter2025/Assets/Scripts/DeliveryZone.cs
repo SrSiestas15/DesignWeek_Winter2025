@@ -8,7 +8,7 @@ public class DeliveryZone : MonoBehaviour
     [SerializeField] private GameObject keyPickUp;
 
     public Transform dropOffZone;
-    private bool delivered = false;
+    [HideInInspector] public bool delivered = false;
 
     // Start is called before the first frame update
     void Start()

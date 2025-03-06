@@ -90,7 +90,8 @@ public class CombinationReader : MonoBehaviour
                 UIController.turnOnUIButtonStatic.SetActive(false);
                 UIController.selfDestructButtonStatic.SetActive(true);
 
-                Instantiate(possibleRobots[i], possibleSpawners[i]);
+                Instantiate(possibleRobots[i], possibleSpawners[roomChosen]);
+                Debug.Log(i);
             }
         }
     }

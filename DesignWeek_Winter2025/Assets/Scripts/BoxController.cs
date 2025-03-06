@@ -75,7 +75,7 @@ public class BoxController : MonoBehaviour
                             {
                                 obstructionDirection = -hitDirection;
                                 gameObject.layer = 6;
-                                Debug.Log(i);
+                                //Debug.Log(i);
 
                                 oppositeHitDirection.x = hitDirection.y;
                                 oppositeHitDirection.y = hitDirection.x;
@@ -94,7 +94,7 @@ public class BoxController : MonoBehaviour
 
                                 obstructionDirection = -hitDirection;
                                 gameObject.layer = 6;
-                                Debug.Log(i);
+                                //Debug.Log(i);
                             }
                             else gameObject.layer = 0;
 
