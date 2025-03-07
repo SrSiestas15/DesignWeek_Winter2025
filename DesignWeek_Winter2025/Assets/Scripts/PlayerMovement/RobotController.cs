@@ -10,6 +10,8 @@ public class RobotController : MonoBehaviour
     [Header("Associated with layers set in inspector")]
     public LayerMask MovementBlocker;
 
+    public static bool roomChip;
+    public static bool pushChip;
     public static bool waterChip;
     public static bool electricChip;
     //public static bool electricChip;

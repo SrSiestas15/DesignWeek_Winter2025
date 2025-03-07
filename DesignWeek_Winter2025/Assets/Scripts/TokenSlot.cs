@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TokenSlot : MonoBehaviour, IDropHandler
 {
-    public float slotID;
+    public int slotID;
 
     public void OnDrop(PointerEventData eventData)
     {

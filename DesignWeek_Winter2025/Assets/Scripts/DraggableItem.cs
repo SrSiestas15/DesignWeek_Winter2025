@@ -10,7 +10,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler ,IEn
 {
     private UnityEngine.UI.Image image;
     [HideInInspector] public Transform parentAfterDrag;
-    public float draggableID;
+    public int draggableID;
 
     public void OnBeginDrag(PointerEventData eventData)
     {

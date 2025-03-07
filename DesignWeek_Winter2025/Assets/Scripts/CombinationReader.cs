@@ -17,13 +17,23 @@ public class CombinationReader : MonoBehaviour
     public static string currentCode;
 
     public GameObject[] slotsTemp;
+    public static GameObject[] slotsTempStatic;
     public GameObject[] chipsTemp;
+    public static GameObject[] chipsTempStatic;
+
+    public static List<GameObject> tempEmpties = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         slots = GetComponentsInChildren<TokenSlot>();
+        chipsTempStatic = chipsTemp;
+        slotsTempStatic = slotsTemp;
 
+    }
+
+    private void Update()
+    {
     }
 
     public static void CheckChildren()
@@ -35,13 +45,13 @@ public class CombinationReader : MonoBehaviour
             {
                 DraggableItem draggableItem = slot.gameObject.GetComponentInChildren<DraggableItem>();
                 slotValues.Add(new Vector2(slot.slotID, draggableItem.draggableID));
-            }
+            } else slotValues.Add(new Vector2(slot.slotID, 0));
 
             
         }
-
         CheckRoom();
-        GetCode();
+        OrganizeTokens();
+        //GetCode();
     }
 
     public static void CheckRoom()
@@ -52,7 +62,7 @@ public class CombinationReader : MonoBehaviour
             if (slotValues[i].y == 1)
             {
                 roomChosen = Mathf.RoundToInt(slotValues[i].x);
-                slotValues.Remove(slotValues[i]);
+                //slotValues.Remove(slotValues[i]);
             }
         }
     }
@@ -66,6 +76,8 @@ public class CombinationReader : MonoBehaviour
             currentCode += slotValues[i].x;
             currentCode += slotValues[i].y;
         }
+        Debug.Log(currentCode);
+
     }
 
     public void RoomAndRobot()
@@ -93,7 +105,34 @@ public class CombinationReader : MonoBehaviour
         }
     }
 
-    void checkChips()
+    public static void OrganizeTokens()
+    {
+        for (int i = 0; i < tempEmpties.Count; i++)
+        {
+            Destroy(tempEmpties[i]);
+        }
+        for (int i = 0; i < slotValues.Count; i++)
+        {
+            if (slotValues[i].x == 0)
+            {
+                chipsTempStatic[(int)slotValues[i].y].gameObject.transform.position = slotsTempStatic[(int)slotValues[i].x + 6].gameObject.transform.position;
+            }
+            else if (slotValues[i].y == 0)
+            {
+                GameObject tempInstatiate = Instantiate(chipsTempStatic[0], slotsTempStatic[(int)slotValues[i].x].gameObject.transform.position, Quaternion.identity);
+                tempEmpties.Add(tempInstatiate);
+            }
+            else
+            {
+                chipsTempStatic[(int)slotValues[i].y].gameObject.transform.position = slotsTempStatic[(int)slotValues[i].x].gameObject.transform.position;
+
+            }
+            Debug.Log($"chip {chipsTempStatic[(int)slotValues[i].y].GetComponent<SimulatorPiece>().type} at slot {slotsTempStatic[(int)slotValues[i].x].name}");
+        }
+
+    }
+
+    void CheckChips()
     {
         for (int i = 0; i < slotValues.Count; i++)
         {

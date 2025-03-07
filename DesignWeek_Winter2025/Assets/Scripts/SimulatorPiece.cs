@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SimulatorPiece : MonoBehaviour
 {
-    public enum chipTypes { room, push, water, electric}
+    public enum chipTypes { room, push, water, electric, empty}
     public chipTypes type;
     public bool nextTo;
     public SimulatorPiece gameObjectInRule;
@@ -15,49 +16,79 @@ public class SimulatorPiece : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        checkAround();
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
-    public static void checkAround(GameObject currentGameObject)
+    public void checkAround()
     {
-        for(int i = 0; i < 4; i++)
+        if(type != chipTypes.empty && type != chipTypes.room)
         {
-            if (i == 0)
+            if (!nextTo)
             {
-                hitDirection = Vector3.up;
+                IsAllowed(true);
             }
-            else if (i == 1)
+            for(int i = 0; i < 4; i++)
             {
-                hitDirection = Vector3.right;
-            }
-            else if (i == 2)
-            {
-                hitDirection = Vector3.down;
-            }
-            else if (i == 3)
-            {
-                hitDirection = Vector3.left;
-            }
+                if (i == 0)
+                {
+                    hitDirection = Vector3.up;
+                }
+                else if (i == 1)
+                {
+                    hitDirection = Vector3.right;
+                }
+                else if (i == 2)
+                {
+                    hitDirection = Vector3.down;
+                }
+                else if (i == 3)
+                {
+                    hitDirection = Vector3.left;
+                }
 
-            RaycastHit2D hitInfo = Physics2D.Linecast(currentGameObject.transform.position + hitDirection, currentGameObject.transform.position + (hitDirection * .25f));
-            if(hitInfo.collider != null && (hitInfo.collider.GetComponent<SimulatorPiece>().type == currentGameObject.GetComponent<SimulatorPiece>().gameObjectInRule.type) == currentGameObject.GetComponent<SimulatorPiece>().nextTo)
-            {
-
+                RaycastHit2D hitInfo = Physics2D.Linecast(transform.position + hitDirection, transform.position + (hitDirection * .25f));
+                if(hitInfo.collider != null && (hitInfo.collider.GetComponent<SimulatorPiece>().type == GetComponent<SimulatorPiece>().gameObjectInRule.type))
+                {
+                    if (GetComponent<SimulatorPiece>().nextTo == true)
+                    {
+                        GetComponent<SimulatorPiece>().IsAllowed(true);
+                    }
+                    else if (GetComponent<SimulatorPiece>().nextTo == false)
+                    {
+                        GetComponent<SimulatorPiece>().IsAllowed(false);
+                    }
+                }
             }
         }
-
     }
 
-    public void IsAllowed()
+    public void IsAllowed(bool whetherTrue)
     {
-        if(type == chipTypes.water)
+        if(type == chipTypes.room)
         {
-            RobotController.waterChip = true;
+            RobotController.roomChip = whetherTrue;
+        }
+
+        if (type == chipTypes.push)
+        {
+            RobotController.pushChip = whetherTrue;
+            Debug.Log("push is "+ whetherTrue);
+        }
+
+        if (type == chipTypes.water)
+        {
+            RobotController.waterChip = whetherTrue;
+        }
+
+        if (type == chipTypes.electric)
+        {
+            RobotController.electricChip = whetherTrue;
         }
 
     }
