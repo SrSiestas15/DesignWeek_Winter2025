@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6824389341424008180}
   - component: {fileID: 1734906900239138721}
   m_Layer: 5
-  m_Name: Token 3
+  m_Name: Room Token (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,9 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 643c7bdacddb9e34596e7a7208d11368, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b68716dd5b17a145aff20494fc05dbe, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -89,4 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentAfterDrag: {fileID: 0}
-  draggableID: 3
+  draggableID: 1

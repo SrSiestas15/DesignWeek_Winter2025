@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6824389341424008180}
   - component: {fileID: 1734906900239138721}
   m_Layer: 5
-  m_Name: Token 1
+  m_Name: Token 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c154c7495d37fe94494f04524c7aa5ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 833c33866230f4d4a80fdc4762cfad0b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,4 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentAfterDrag: {fileID: 0}
-  draggableID: 1
+  draggableID: 3
