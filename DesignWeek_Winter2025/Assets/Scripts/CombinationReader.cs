@@ -95,30 +95,30 @@ public class CombinationReader : MonoBehaviour
 
     }
 
-    public void RoomAndRobot()
-    {
-        for (int i = 0; i < possibleCombinations.Count; i++)
-        {
-            if (possibleCombinations[i] == currentCode && roomChosen != 0)
-            {
+    //public void RoomAndRobot()
+    //{
+    //    for (int i = 0; i < possibleCombinations.Count; i++)
+    //    {
+    //        if (possibleCombinations[i] == currentCode && roomChosen != 0)
+    //        {
 
-                if (roomResetters[roomChosen] != null)
-                {
-                    roomResetters[roomChosen].ResetPositions();
-                }
+    //            if (roomResetters[roomChosen] != null)
+    //            {
+    //                roomResetters[roomChosen].ResetPositions();
+    //            }
 
-                CameraController.roomNum = roomChosen;
-                CameraController.moving = true;
+    //            CameraController.roomNum = roomChosen;
+    //            CameraController.moving = true;
 
-                UIController.TurnOnOff(false);
-                UIController.turnOnUIButtonStatic.SetActive(false);
-                UIController.selfDestructButtonStatic.SetActive(true);
+    //            UIController.TurnOnOff(false);
+    //            UIController.turnOnUIButtonStatic.SetActive(false);
+    //            UIController.selfDestructButtonStatic.SetActive(true);
 
-                Instantiate(possibleRobots[i], possibleSpawners[roomChosen]);
-                Debug.Log(i);
-            }
-        }
-    }
+    //            Instantiate(possibleRobots[i], possibleSpawners[roomChosen]);
+    //            Debug.Log(i);
+    //        }
+    //    }
+    //}
 
     public static void OrganizeTokens()
     {
@@ -192,6 +192,7 @@ public class CombinationReader : MonoBehaviour
 
     public static void Reset()
     {
+        Debug.Log("unlocked 2 is " + unlocked2);
         UIChipsStatic[1].SetParent(UISlotsStatic[7]);
         Debug.Log($"move {UIChipsStatic[1].name} to {UISlotsStatic[7].name}");
 
@@ -202,7 +203,7 @@ public class CombinationReader : MonoBehaviour
         }
         if (unlocked3)
         {
-            UIChipsStatic[3].transform.SetParent(UISlotsStatic[1].transform);
+            UIChipsStatic[3].transform.SetParent(UISlotsStatic[9].transform);
         }
         if (unlocked4)
         {
