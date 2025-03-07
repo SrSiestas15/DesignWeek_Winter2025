@@ -21,6 +21,18 @@ public class CombinationReader : MonoBehaviour
     public GameObject[] chipsTemp;
     public static GameObject[] chipsTempStatic;
 
+    public static bool unlocked3;
+    public static bool unlocked4;
+    public static bool unlocked5;
+    public static bool unlocked6;
+    public static bool unlocked7;
+    public static bool unlocked8;
+
+    public List<RectTransform> UISlots;
+    public static List<RectTransform> UISlotsStatic;
+    public List<RectTransform> UIChips;
+    public static List<RectTransform> UIChipsStatic;
+
     public static List<GameObject> tempEmpties = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -30,6 +42,8 @@ public class CombinationReader : MonoBehaviour
         chipsTempStatic = chipsTemp;
         slotsTempStatic = slotsTemp;
 
+        UISlotsStatic = UISlots;
+        UIChipsStatic = UIChips;
     }
 
     private void Update()
@@ -127,7 +141,7 @@ public class CombinationReader : MonoBehaviour
                 chipsTempStatic[(int)slotValues[i].y].gameObject.transform.position = slotsTempStatic[(int)slotValues[i].x].gameObject.transform.position;
 
             }
-            Debug.Log($"chip {chipsTempStatic[(int)slotValues[i].y].GetComponent<SimulatorPiece>().type} at slot {slotsTempStatic[(int)slotValues[i].x].name}");
+            //Debug.Log($"chip {chipsTempStatic[(int)slotValues[i].y].GetComponent<SimulatorPiece>().type} at slot {slotsTempStatic[(int)slotValues[i].x].name}");
         }
 
     }
@@ -138,6 +152,42 @@ public class CombinationReader : MonoBehaviour
         {
             currentCode += slotValues[i].x;
             currentCode += slotValues[i].y;
+        }
+    }
+
+    public static void Reset()
+    {
+        UIChipsStatic[1].SetParent(UISlotsStatic[7]);
+        UIChipsStatic[2].SetParent(UISlotsStatic[8]);
+        Debug.Log($"move {UIChipsStatic[1].name} to {UISlotsStatic[7].name}");
+
+
+        if (unlocked3)
+        {
+            UIChipsStatic[3].transform.SetParent(UISlotsStatic[1].transform);
+        }
+        if (unlocked4)
+        {
+            UIChipsStatic[4].transform.SetParent(UISlotsStatic[2].transform);
+
+        }
+        if (unlocked5)
+        {
+            UIChipsStatic[5].transform.SetParent(UISlotsStatic[3].transform);
+
+        }
+        if (unlocked6)
+        {
+            UIChipsStatic[6].transform.position = UISlotsStatic[4].transform.position;
+
+        }
+        if (unlocked7)
+        {
+            UIChipsStatic[7].transform.position = UISlotsStatic[5].transform.position;
+        }
+        if (unlocked8)
+        {
+            UIChipsStatic[8].transform.position = UISlotsStatic[8].transform.position;
         }
     }
 }
