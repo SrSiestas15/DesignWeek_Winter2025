@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public static GameObject terminalUIStatic;
-    public GameObject turnOnUIButton;
-    public static GameObject turnOnUIButtonStatic;
     public GameObject selfDestructButton;
     public static GameObject selfDestructButtonStatic;
 
@@ -16,7 +14,6 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        turnOnUIButtonStatic = turnOnUIButton;
         selfDestructButton.SetActive(false);
         selfDestructButtonStatic = selfDestructButton;
 
@@ -37,7 +34,6 @@ public class UIController : MonoBehaviour
     public static void TurnOnOff(bool on)
     {
         terminalUIStatic.SetActive(on);
-        turnOnUIButtonStatic.SetActive(!on);
 
         CombinationReader.Reset();
     }

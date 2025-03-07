@@ -180,7 +180,6 @@ public class CombinationReader : MonoBehaviour
                 CameraController.moving = true;
 
                 UIController.TurnOnOff(false);
-                UIController.turnOnUIButtonStatic.SetActive(false);
                 UIController.selfDestructButtonStatic.SetActive(true);
 
                 Debug.Log(i);
