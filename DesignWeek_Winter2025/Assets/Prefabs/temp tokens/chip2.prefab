@@ -173,4 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   nextTo: 0
-  gameObjectInRule: {fileID: 1790694334770881955}
+  gameObjectInRule: {fileID: 6298449632134313847, guid: 20d15d9233782d141a76cdd2fc19e105, type: 3}

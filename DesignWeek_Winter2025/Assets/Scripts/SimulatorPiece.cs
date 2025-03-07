@@ -13,6 +13,8 @@ public class SimulatorPiece : MonoBehaviour
     RaycastHit2D hitInfo;
     public static Vector3 hitDirection;
 
+    public bool isAllowed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +80,6 @@ public class SimulatorPiece : MonoBehaviour
         if (type == chipTypes.push)
         {
             RobotController.pushChip = whetherTrue;
-            Debug.Log("push is "+ whetherTrue);
         }
 
         if (type == chipTypes.water)

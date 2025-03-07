@@ -18,9 +18,11 @@ public class RobotController : MonoBehaviour
     //public static bool electricChip;
 
     RaycastHit2D hitInfo;
+    private LayerMask interactLayer;
 
     void Start()
     {
+        interactLayer = LayerMask.GetMask("Interactable");
         moveLocation.parent = null;   
     }
 
@@ -59,7 +61,7 @@ public class RobotController : MonoBehaviour
 
     private void Interact()
     {
-        hitInfo = Physics2D.Linecast(transform.localPosition, transform.localPosition + (Vector3.up * 2));
+        hitInfo = Physics2D.Linecast(transform.localPosition, transform.localPosition + (Vector3.up * 2), interactLayer);
         Debug.DrawLine(transform.localPosition, transform.localPosition + (Vector3.up * 2));
         if (hitInfo.transform.GetComponent<UIController>())
         {
@@ -71,6 +73,11 @@ public class RobotController : MonoBehaviour
         {
             Destroy(hitInfo.transform.gameObject);
             PickUpController pickUpScript = hitInfo.transform.GetComponent<PickUpController>();
+            if (pickUpScript.pickUpID == 2)
+            {
+                CombinationReader.unlocked2 = true;
+            }
+
             if (pickUpScript.pickUpID == 3)
             {
                 CombinationReader.unlocked3 = true;

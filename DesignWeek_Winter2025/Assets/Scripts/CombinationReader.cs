@@ -21,6 +21,7 @@ public class CombinationReader : MonoBehaviour
     public GameObject[] chipsTemp;
     public static GameObject[] chipsTempStatic;
 
+    public static bool unlocked2;
     public static bool unlocked3;
     public static bool unlocked4;
     public static bool unlocked5;
@@ -35,6 +36,8 @@ public class CombinationReader : MonoBehaviour
 
     public static List<GameObject> tempEmpties = new List<GameObject>();
 
+    public static CombinationReader publicReaderStatic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +47,8 @@ public class CombinationReader : MonoBehaviour
 
         UISlotsStatic = UISlots;
         UIChipsStatic = UIChips;
-    }
 
-    private void Update()
-    {
+        publicReaderStatic = GetComponent<CombinationReader>();
     }
 
     public static void CheckChildren()
@@ -143,7 +144,7 @@ public class CombinationReader : MonoBehaviour
             }
             //Debug.Log($"chip {chipsTempStatic[(int)slotValues[i].y].GetComponent<SimulatorPiece>().type} at slot {slotsTempStatic[(int)slotValues[i].x].name}");
         }
-
+        publicReaderStatic.spawnRobot();
     }
 
     void CheckChips()
@@ -155,13 +156,50 @@ public class CombinationReader : MonoBehaviour
         }
     }
 
+    void spawnRobot()
+    {
+        bool success = true;
+        float numOfImportantChips = 0;
+        for (int i = 0; i < slotValues.Count; i++)
+        {
+            if(slotValues[i].y > 0 && UIChipsStatic[(int)slotValues[i].y].GetComponent<SimulatorPiece>().isAllowed == false)
+            {
+                success = false;
+                Debug.Log("failure");
+                return;
+            }
+            else
+            {
+                //Debug.Log(roomResetters[roomChosen]);
+                if (roomResetters[5] != null)
+                {
+                    roomResetters[roomChosen].ResetPositions();
+                }
+
+                CameraController.roomNum = roomChosen;
+                CameraController.moving = true;
+
+                UIController.TurnOnOff(false);
+                UIController.turnOnUIButtonStatic.SetActive(false);
+                UIController.selfDestructButtonStatic.SetActive(true);
+
+                Debug.Log(i);
+                Instantiate(possibleRobots[0], possibleSpawners[roomChosen]);
+            }
+        }
+        Debug.Log(numOfImportantChips);
+    }
+
     public static void Reset()
     {
         UIChipsStatic[1].SetParent(UISlotsStatic[7]);
-        UIChipsStatic[2].SetParent(UISlotsStatic[8]);
         Debug.Log($"move {UIChipsStatic[1].name} to {UISlotsStatic[7].name}");
 
 
+        if (unlocked2)
+        {
+            UIChipsStatic[2].SetParent(UISlotsStatic[8]);
+        }
         if (unlocked3)
         {
             UIChipsStatic[3].transform.SetParent(UISlotsStatic[1].transform);
